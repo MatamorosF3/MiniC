@@ -1,0 +1,10 @@
+hola
+1234
+"Francuscio Javeira----"
+'a'
+/*********/
+/*sdasdasd*/
+
+int
+char
+String
