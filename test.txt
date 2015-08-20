@@ -10,7 +10,7 @@ string in;
 printf("Hola");
 scanf("%d");
 
-for(int c = 0; b<5; b++){
+for(int c = 0; b<5; b=b+1){
 	if(x<c){
 	
 	}else{
@@ -22,3 +22,6 @@ while(b>=a){
 }
 
 }
+
+###!
+@##$%

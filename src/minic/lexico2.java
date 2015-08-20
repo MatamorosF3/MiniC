@@ -681,10 +681,12 @@ class lexico2 {
         case '\u2028':
         case '\u2029':
           yyline++;
+          yycolumn = 0;
           zzR = false;
           break;
         case '\r':
           yyline++;
+          yycolumn = 0;
           zzR = true;
           break;
         case '\n':
@@ -692,10 +694,12 @@ class lexico2 {
             zzR = false;
           else {
             yyline++;
+            yycolumn = 0;
           }
           break;
         default:
           zzR = false;
+          yycolumn += zzCharCount;
         }
       }
 
@@ -785,7 +789,7 @@ class lexico2 {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { System.out.println("Asaber: " + yytext());
+            { System.out.println("Unexpected token: \'"+yytext()+"\' at: "+yyline);
             }
           case 32: break;
           case 2: 

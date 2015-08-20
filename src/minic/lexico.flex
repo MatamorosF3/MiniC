@@ -6,8 +6,10 @@ package minic;
 %class lexico2
 
 %standalone
+%unicode
 %line
 %char
+%column
 
 /* main character classes */
 LineTerminator = \r|\n|\r\n
@@ -82,6 +84,6 @@ emptySpace = [\n\r\t]+
         
         "while"\                 {System.out.println("Open while: " + yytext());}
 
-        .                       {System.out.println("Asaber: " + yytext());}
+        .                       {System.out.println("Unexpected token: \'"+yytext()+"\' at: "+yyline);}
 }
 

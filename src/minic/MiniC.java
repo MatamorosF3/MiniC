@@ -22,6 +22,7 @@ public class MiniC {
         // TODO code application logic here
         File m = new File("./src/minic/lexico2.java");
         File m2 = new File("./src/minic/lexico2.java~");
+        File m3 = new File("./build/classes/minic");
         
         if(m.exists()){
             m.delete();
@@ -29,6 +30,10 @@ public class MiniC {
         }
         if(m2.exists()){
             m2.delete();
+            System.out.println("Borrando el Archivo");
+        }
+        if(m3.exists()){
+            m3.delete();
             System.out.println("Borrando el Archivo");
         }
          
