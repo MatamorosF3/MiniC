@@ -1,15 +1,24 @@
-hola
-1234
-"Francuscio	
-Javeira----"
-'a'
-/*********/
-/*sdasdasd*/
+//Comentario
 
+int main(){
+int x = 5;
+int b = 6;
+char y = 'a';
+string z = "String";
+string in;
 
-"
+printf("Hola");
+scanf("%d");
 
-ids
-masid
-mas_id
+for(int c = 0; b<5; b++){
+	if(x<c){
+	
+	}else{
+	}
+}
 
+while(b>=a){
+
+}
+
+}

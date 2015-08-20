@@ -23,10 +23,12 @@ public class MiniC {
         File m = new File("./src/minic/lexico2.java");
         File m2 = new File("./src/minic/lexico2.java~");
         
-        if(m.delete()){
+        if(m.exists()){
+            m.delete();
             System.out.println("Borrando el Archivo");
         }
-        if(m2.delete()){
+        if(m2.exists()){
+            m2.delete();
             System.out.println("Borrando el Archivo");
         }
          
