@@ -733,7 +733,7 @@ class lexico2 {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { System.out.println("String: " + yytext());
+            { System.out.println("soy un String: " + yytext());
             }
           case 7: break;
           case 2: 
@@ -741,19 +741,19 @@ class lexico2 {
             }
           case 8: break;
           case 3: 
-            { System.out.println("entero: " + yytext());
+            { System.out.println("soy un entero: " + yytext());
             }
           case 9: break;
           case 4: 
-            { System.out.println("int: " + yytext());
+            { System.out.println("soy un int: " + yytext());
             }
           case 10: break;
           case 5: 
-            { System.out.println("Comentario tradicional: " + yytext());
+            { System.out.println("soy un Comentario tradicional: " + yytext());
             }
           case 11: break;
           case 6: 
-            { System.out.println("char: " + yytext());
+            { System.out.println("soy un char: " + yytext());
             }
           case 12: break;
           default:

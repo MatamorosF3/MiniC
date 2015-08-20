@@ -5,6 +5,8 @@
  */
 package minic;
 import java.io.*;
+import java.util.Scanner;
+import jflex.SilentExit;
 
 
 /**
@@ -16,11 +18,25 @@ public class MiniC {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+    public static void main(String[] args) throws FileNotFoundException, IOException, SilentExit {
         // TODO code application logic here
-        jflex.Main.generate( new File("lexico.flex") );
-        lexico2 lex = new lexico2( new FileReader("test.txt") );
+        File m = new File("./src/minic/lexico2.java");
+        File m2 = new File("./src/minic/lexico2.java~");
         
+        if(m.delete()){
+            System.out.println("Borrando el Archivo");
+        }
+        if(m2.delete()){
+            System.out.println("Borrando el Archivo");
+        }
+         
+        File f = new File("./src/minic/lexico.flex");
+        
+        
+        jflex.Main.generate(f);
+        
+        
+        lexico2 lex = new lexico2( new FileReader("test.txt") );
         
          while (lex.yylex() != lexico2.YYEOF);
         

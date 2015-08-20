@@ -1,10 +1,15 @@
 hola
 1234
-"Francuscio Javeira----"
+"Francuscio	
+Javeira----"
 'a'
 /*********/
 /*sdasdasd*/
 
-int
-char
-String
+
+"
+
+ids
+masid
+mas_id
+
