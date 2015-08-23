@@ -1,5 +1,7 @@
-//Comentario
-
+//Comentario                                           
+//
+/*Francisco*/
+int array[]
 int main(){
 int x = 5;
 int b = 6;
@@ -25,3 +27,5 @@ while(b>=a){
 
 ###!
 @##$%
+/*Francisco*/
+//
