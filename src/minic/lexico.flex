@@ -16,9 +16,9 @@ InputCharacter = [^\r\n]
 
 
 
-Comment = {TraditionalComment}|{EndOfLineComment}
+Comment = {TraditionalComment}|{LineComment}
 TraditionalComment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
-EndOfLineComment = "//" {InputCharacter}* {LineTerminator}?
+LineComment = "//" {InputCharacter}* {LineTerminator}?
 LineTerminator = \r|\n|\r\n
 
 
@@ -46,9 +46,9 @@ emptySpace = [\n\r\t ]
         "string"        {System.out.println("Type: " + yytext());} 
         "scanf"         {System.out.println("Scaneo: " + yytext());}
         "printf"        {System.out.println("Scaneo: " + yytext());}
-        "\"%d"\"        {System.out.println("Scaneo: " + yytext());}
+        "\"%d\""        {System.out.println("Scaneo: " + yytext());}
         "\"%s\""        {System.out.println("Scaneo: " + yytext());}
-        "\"%f\""        {System.out.println("Scaneo: " + yytext());}         
+        "\"%c\""        {System.out.println("Scaneo: " + yytext());}         
 
         /*Arithmetic Operators*/
         "+"             {System.out.println("Plus: " + yytext());}        
@@ -57,7 +57,6 @@ emptySpace = [\n\r\t ]
         "--"            {System.out.println("MinusMinus: " + yytext());}
         "*"             {System.out.println("Mult: " + yytext());}
         "/"             {System.out.println("Div: " + yytext());}
-        "%"             {System.out.println("mod: " + yytext());}
 
         /*Relational Operators*/                
         "!="            {System.out.println("Not Equal: " + yytext());}
@@ -97,5 +96,5 @@ emptySpace = [\n\r\t ]
         {Integer}       {System.out.println("Integer: " + yytext());}        
         {constchar}     {System.out.println("Char: " + yytext());}  
         {Identifier}    {System.out.println("Identifier: "  + yytext());}
-        .               {System.out.println("Unexpected token: \'"+yytext()+"\' at: "+yyline);}
+        .               {System.out.println("Unexpected token: \'"+yytext()+"\' at: "+(yyline+1)+ " column:" + (yycolumn+1));}
 }
