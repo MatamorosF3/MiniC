@@ -84,6 +84,6 @@ emptySpace = [\n\r\t]+
         
         "while"\                 {System.out.println("Open while: " + yytext());}
 
-        .                       {System.out.println("Unexpected token: \'"+yytext()+"\' at: "+yyline);}
+        .                       {System.out.println("Unexpected token: \'"+yytext()+"\' at line: "+yyline);}
 }
 

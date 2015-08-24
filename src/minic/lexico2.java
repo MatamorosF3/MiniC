@@ -789,7 +789,7 @@ class lexico2 {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { System.out.println("Unexpected token: \'"+yytext()+"\' at: "+yyline);
+            { System.out.println("Unexpected token: \'"+yytext()+"\' at line: "+yyline);
             }
           case 32: break;
           case 2: 
