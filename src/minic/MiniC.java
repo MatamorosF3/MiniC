@@ -39,10 +39,10 @@ public class MiniC {
          
         File f = new File("./src/minic/lexico.flex");
         
-        
+        /*""*/
         jflex.Main.generate(f);
         
-        
+        int a = 3/2;
         lexico2 lex = new lexico2( new FileReader("test.txt") );
         
          while (lex.yylex() != lexico2.YYEOF);
