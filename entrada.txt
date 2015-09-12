@@ -1,6 +1,6 @@
 int main(int a, char args[]){
 int a;
-
+a = b= c = d = e = f;
 if(a > b ){
 	printf("hola");
 	return 2;
