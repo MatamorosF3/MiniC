@@ -18,35 +18,88 @@ public class MiniC {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws FileNotFoundException, IOException, SilentExit {
-        // TODO code application logic here
-        File m = new File("./src/minic/lexico2.java");
-        File m2 = new File("./src/minic/lexico2.java~");
-        File m3 = new File("./build/classes/minic");
+    public static void main(String[] args) throws FileNotFoundException, IOException, SilentExit, Exception {
+        /* Start the parser */
+    String a[] = {"JFLEX.flex"};
+    String b[] = {"CUP.cup"};
+    jflex.Main.main(a);
+    java_cup.Main.main(b);
+   
+    
+    	InputStream inStreamSYM = null;
+        InputStream inStreamPARSER = null;
+	OutputStream outStreamSYM = null;
+        OutputStream outStreamPARSER = null;
+        InputStream inStreamYYLEX = null;
+	OutputStream outStreamYYLEX = null;
+        	
+    	try{
+    		
+    	    File afile =new File("sym.java");
+            File bfile =new File("parser.java");
+            File cfile = new File("Yylex.java");
+    	    File dfile =new File("./src/minic/sym.java");
+            File efile =new File("./src/minic/parser.java");
+            File ffile =new File("./src/minic/yylex.java");
+    		
+    	    inStreamSYM = new FileInputStream(afile);
+    	    inStreamPARSER = new FileInputStream(bfile);
+            inStreamYYLEX = new FileInputStream(cfile);
+            outStreamSYM = new FileOutputStream(dfile);
+            outStreamPARSER = new FileOutputStream(efile);
+            outStreamYYLEX = new FileOutputStream(ffile);
+        	
+    	    byte[] buffer = new byte[1024];
+    		
+    	    int length;
+    	    //copy the file content in bytes 
+    	    while ((length = inStreamSYM.read(buffer)) > 0){
+    	  
+    	    	outStreamSYM.write(buffer, 0, length);
+    	 
+    	    }
+    	 
+    	    inStreamSYM.close();
+    	    outStreamSYM.close();
+    	    byte[] buffer2 = new byte[1024];
+              while ((length = inStreamPARSER.read(buffer2)) > 0){
+    	  
+    	    	outStreamPARSER.write(buffer2, 0, length);
+    	 
+    	    }
+    	 
+    	    inStreamPARSER.close();
+    	    outStreamPARSER.close();
+            
+             byte[] buffer3 = new byte[1024];
+              while ((length = inStreamYYLEX.read(buffer3)) > 0){
+    	  
+    	    	outStreamYYLEX.write(buffer3, 0, length);
+    	 
+    	    }
+    	 
+    	    inStreamYYLEX.close();
+    	    outStreamYYLEX.close();
+    	    //delete the original file
+    	    afile.delete();
+            bfile.delete();
+            cfile.delete();
+    	    
+    	    System.out.println("File is copied successful!");
+    	    
+    	}catch(IOException e){
+    	    e.printStackTrace();
+    	}
         
-        if(m.exists()){
-            m.delete();
-            System.out.println("Borrando el Archivo");
+        
+    parser p;
+        try {
+            
+            p = new parser(new Yylex(new java.io.FileReader("entrada.txt")));
+            p.parse();
         }
-        if(m2.exists()){
-            m2.delete();
-            System.out.println("Borrando el Archivo");
+        catch(Exception e) { System.out.println(e.getMessage());
+        
         }
-        if(m3.exists()){
-            m3.delete();
-            System.out.println("Borrando el Archivo");
-        }
-         
-        File f = new File("./src/minic/lexico.flex");
-        
-        /*""*/
-        jflex.Main.generate(f);
-        
-        int a = 3/2;
-        lexico2 lex = new lexico2( new FileReader("test.txt") );
-        
-         while (lex.yylex() != lexico2.YYEOF);
-        
-//       
 }
 }

@@ -1,0 +1,98 @@
+package minic;
+import java.io.*;
+import java_cup.runtime.*; 
+
+parser code
+{:
+	public void syntax_error(Symbol s){
+		report_error("Error de sintaxis. Linea: " + (s.right + 1) +
+		" Columna: " + s.left + ". Texto: \"" + s.value + "\"", null);
+	}
+:}
+// LBRACE {
+terminal String IF, ELSE, FOR, WHILE, RETURN, VOID, CHAR, STRING, SCANF, PRINTF, BREAK,DFLAG, SFLAG, CFLAG;
+terminal String  NOTEQ, EQEQ, GT, LT, GTEQ, LTEQ, OROR, ANDAND, NOT, OR, AND;
+terminal String EQ, PLUSEQ, MINUSEQ, MULTEQ, DIVEQ;
+terminal String SEMICOLON, COMMA, LBRACE, RBRACE, LPAREN, RPAREN, LBRACK, RBRACK;
+terminal String CONSTSTR, CONSTCHAR, IDENTIFIER;
+terminal String PLUS, PLUSPLUS, MINUSMINUS, MINUS, MULT, DIV, INT;
+terminal String MAIN, TWOPOINTS, DO ;
+terminal integer INTEGER;
+
+non terminal Main_Function,declaration_list,declaration,variable_declaration ,expr,term;
+non terminal factor,variable_list,variable,variable_initialization,type,jump_statement;
+non terminal if_statement,statement_list,statement,statement_inside_if,logical_expression;
+non terminal relational_expression,relational_operators,logical_operators,boolean_expression,multiple_boolean;
+non terminal function_declaration, assignment_statement, assignment_expression, params, param_list;
+non terminal param_type_list,param_id,for_statement,expr_for,E1,E2,E3,constant;
+non terminal init_for,condition,function_call,function_call_statement,increment;
+non terminal expr_increment, inc,args, arg_list, while_statement, statement_inside_while;
+non terminal printf_statement, scanf_statement, flags, play, main, function_definition,declarations;
+non terminal function_definition_list;
+
+
+Main_Function ::= INT MAIN LPAREN params RPAREN LBRACE statement_list RETURN expr SEMICOLON RBRACE function_definition_list;
+variable_declaration ::= type variable_list SEMICOLON;
+expr ::= expr PLUS term | expr MINUS term | term;
+term ::= term MULT factor | term DIV factor | factor;
+factor ::=    INTEGER| variable| LPAREN expr RPAREN| constant;
+variable_list ::=   variable_list COMMA variable_initialization | variable_initialization;
+			
+variable ::= IDENTIFIER | IDENTIFIER LBRACK INTEGER RBRACK;
+variable_initialization ::= variable_initialization EQ expr| variable;
+type ::= INT | STRING | CHAR;
+
+jump_statement ::= BREAK SEMICOLON | RETURN SEMICOLON | RETURN expr SEMICOLON;
+if_statement ::= IF LPAREN boolean_expression RPAREN statement_inside_if;
+
+statement_list ::= statement_list statement | ;
+statement::= if_statement | jump_statement|assignment_statement | function_call_statement | for_statement| variable_declaration 
+			| while_statement | printf_statement | scanf_statement;
+
+statement_inside_if ::= LBRACE statement_list RBRACE | LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE;
+
+printf_statement ::= PRINTF LPAREN CONSTSTR COMMA expr RPAREN SEMICOLON | PRINTF LPAREN CONSTSTR RPAREN SEMICOLON ;
+scanf_statement ::=  SCANF LPAREN  flags COMMA variable RPAREN SEMICOLON;
+
+flags ::= DFLAG | SFLAG | CFLAG;
+boolean_expression ::= relational_expression logical_expression;
+relational_expression ::=  expr relational_operators expr | LPAREN relational_expression RPAREN ;
+relational_operators ::=  LTEQ | LT | GT | GTEQ | EQEQ | NOTEQ;
+logical_expression ::= logical_operators boolean_expression |;
+logical_operators ::= ANDAND | OROR;
+function_declaration ::= type IDENTIFIER LPAREN params RPAREN SEMICOLON;
+function_definition_list ::= function_definition | function_definition_list function_definition;
+function_definition ::= type IDENTIFIER LPAREN params RPAREN LBRACE statement_list RBRACE | VOID IDENTIFIER LPAREN params RPAREN LBRACE statement_list RBRACE ;
+assignment_statement ::= assignment_expression SEMICOLON;
+assignment_expression ::= variable_initialization| expr_increment | assignment_expression variable_initialization ;
+params ::= param_list | ;
+param_list ::= param_list COMMA param_type_list | param_type_list;
+param_type_list ::= type param_id;
+param_id ::= IDENTIFIER | IDENTIFIER LBRACK RBRACK;
+
+while_statement ::= WHILE LPAREN boolean_expression RPAREN statement_inside_while;
+statement_inside_while ::= LBRACE statement_list RBRACE;
+
+for_statement ::= FOR LPAREN expr_for RPAREN LBRACE statement_list RBRACE;
+expr_for ::= E1 SEMICOLON E2 SEMICOLON E3
+			;
+E1 ::= init_for| ;
+E2 ::= condition| ;
+E3 ::= increment| ;
+
+
+constant ::= CONSTCHAR
+		| CONSTSTR
+		;
+
+init_for ::= init_for COMMA INT assignment_expression| INT assignment_expression | assignment_expression;
+
+condition ::= condition COMMA IDENTIFIER relational_operators expr | IDENTIFIER relational_operators expr;
+function_call ::= IDENTIFIER LPAREN args RPAREN;
+function_call_statement ::= function_call SEMICOLON;
+increment ::= increment COMMA expr_increment | expr_increment;
+expr_increment ::= IDENTIFIER inc;
+inc ::= MINUSEQ expr | MINUSMINUS | PLUSEQ expr | PLUSPLUS | DIVEQ expr ;
+
+args::= arg_list| ;
+arg_list ::= arg_list COMMA expr | expr	;
