@@ -1,4 +1,4 @@
-package minic;
+package lexico;
 import java.io.*;
 import java_cup.runtime.*; 
 
@@ -28,21 +28,28 @@ non terminal param_type_list,param_id,for_statement,expr_for,E1,E2,E3,constant;
 non terminal init_for,condition,function_call,function_call_statement,increment;
 non terminal expr_increment, inc,args, arg_list, while_statement, statement_inside_while;
 non terminal printf_statement, scanf_statement, flags, play, main, function_definition,declarations;
-non terminal function_definition_list;
+non terminal function_definition_list, inc_special, Expression;
 
 
-Main_Function ::= INT MAIN LPAREN params RPAREN LBRACE statement_list RETURN expr SEMICOLON RBRACE function_definition_list;
+Main_Function ::= INT MAIN LPAREN params RPAREN LBRACE statement_list RETURN expr SEMICOLON RBRACE function_definition_list |
+error {: System.out.println("Error sintactico en la sentencia"); :} ;
 variable_declaration ::= type variable_list SEMICOLON;
 expr ::= expr PLUS term | expr MINUS term | term;
 term ::= term MULT factor | term DIV factor | factor;
-factor ::=    INTEGER| variable| LPAREN expr RPAREN| constant;
+factor ::=    INTEGER| variable| LPAREN expr RPAREN| constant | function_call ;
 variable_list ::=   variable_list COMMA variable_initialization | variable_initialization;
 			
-variable ::= IDENTIFIER | IDENTIFIER LBRACK INTEGER RBRACK;
+variable ::= IDENTIFIER | IDENTIFIER LBRACK expr RBRACK;
 variable_initialization ::= variable_initialization EQ expr| variable;
 type ::= INT | STRING | CHAR;
 
-jump_statement ::= BREAK SEMICOLON | RETURN SEMICOLON | RETURN expr SEMICOLON;
+Expression ::= variable EQ Expression 
+			| variable PLUSEQ Expression
+			| variable MINUSEQ Expression
+			| variable PLUSPLUS
+			| variable MULTEQ Expression;
+
+jump_statement ::= BREAK SEMICOLON | RETURN SEMICOLON | RETURN expr SEMICOLON ;
 if_statement ::= IF LPAREN boolean_expression RPAREN statement_inside_if;
 
 statement_list ::= statement_list statement | ;
@@ -85,14 +92,14 @@ constant ::= CONSTCHAR
 		| CONSTSTR
 		;
 
-init_for ::= init_for COMMA INT assignment_expression| INT assignment_expression | assignment_expression;
+init_for ::= init_for COMMA INT assignment_expression| INT assignment_expression | assignment_expression | init_for COMMA assignment_expression;
 
 condition ::= condition COMMA IDENTIFIER relational_operators expr | IDENTIFIER relational_operators expr;
 function_call ::= IDENTIFIER LPAREN args RPAREN;
 function_call_statement ::= function_call SEMICOLON;
 increment ::= increment COMMA expr_increment | expr_increment;
-expr_increment ::= IDENTIFIER inc;
-inc ::= MINUSEQ expr | MINUSMINUS | PLUSEQ expr | PLUSPLUS | DIVEQ expr ;
-
+expr_increment ::= variable inc | inc_special variable;
+inc ::= MINUSEQ expr | MINUSMINUS | PLUSEQ expr | PLUSPLUS | DIVEQ expr | MULTEQ expr ;
+inc_special ::= PLUSPLUS | MINUSMINUS;
 args::= arg_list| ;
 arg_list ::= arg_list COMMA expr | expr	;
