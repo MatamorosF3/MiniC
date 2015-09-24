@@ -1,0 +1,217 @@
+package minic;
+import java.io.*;
+import java_cup.runtime.*; 
+import AST.*;
+
+
+parser code
+{:
+	int errors = 0;
+
+	public void syntax_error(Symbol s){
+		report_error("Error de sintaxis. Linea: " + (s.right + 1) +
+		" Columna: " + s.left + ". Texto: \"" + s.value + "\"", null);
+	}
+
+:}
+
+
+terminal String IF, ELSE, FOR, WHILE, RETURN, VOID, CHAR, STRING, SCANF, PRINTF, BREAK,DFLAG, SFLAG, CFLAG;
+terminal String NOTEQ, EQEQ, GT, LT, GTEQ, LTEQ, OROR, ANDAND, NOT, OR, AND;
+terminal String EQ, PLUSEQ, MINUSEQ, MULTEQ, DIVEQ;
+terminal String SEMICOLON, COMMA, LBRACE, RBRACE, LPAREN, RPAREN, LBRACK, RBRACK;
+terminal String CONSTSTR, CONSTCHAR, IDENTIFIER;
+terminal String PLUS, PLUSPLUS, MINUSMINUS, MINUS, MULT, DIV, INT;
+terminal String MAIN, TWOPOINTS, DO ;
+terminal int INTEGER;
+
+non terminal Main_Function;
+non terminal declaration_list;
+non terminal declaration;
+non terminal variable_declaration;
+non terminal expr;
+non terminal term;
+non terminal factor;
+non terminal variable_list;
+non terminal variable;
+non terminal variable_initialization;
+non terminal type;
+non terminal jump_statement;
+non terminal if_statement;
+non terminal statement_list;
+non terminal statement;
+non terminal statement_inside_if;
+non terminal logical_expression;
+non terminal relational_expression;
+non terminal relational_operators;
+non terminal logical_operators;
+non terminal boolean_expression;
+non terminal multiple_boolean;
+non terminal function_declaration;
+non terminal assignment_statement;
+non terminal assignment_expression;
+non terminal params;
+non terminal param_list;
+non terminal param_type_list;
+non terminal param_id;
+non terminal for_statement;
+non terminal expr_for;
+non terminal E1;
+non terminal E2;
+non terminal E3;
+non terminal constant;
+non terminal init_for;
+non terminal condition;
+non terminal function_call;
+non terminal function_call_statement;
+non terminal increment;
+non terminal expr_increment;
+non terminal inc,args;
+non terminal arg_list;
+non terminal while_statement;
+non terminal statement_inside_while;
+non terminal printf_statement;
+non terminal scanf_statement;
+non terminal flags;
+non terminal play;
+non terminal main;
+non terminal function_definition,declarations;
+non terminal function_definition_list;
+non terminal inc_special;
+non terminal Expression;
+non terminal exprP;
+non terminal termP;
+non terminal variable_initializationP;
+non terminal assignment_expressionP;
+non terminal param_listP;
+non terminal init_forP;
+non terminal conditionP;
+non terminal incrementP;
+non terminal arg_listP;
+
+
+
+Main_Function ::= INT MAIN LPAREN RPAREN LBRACE expr RBRACE {:System.out.println("soy un main ");:};
+
+
+statement_list ::=  statement_list  statement {:System.out.println("Meti a la lista ");:}
+|  {:System.out.println("Soy vacio ");:} 
+; 
+
+statement::= if_statement  {:System.out.println("Meti if statement");:}
+			| jump_statement {:System.out.println("Meti jump statement");:}
+			| assignment_statement {:System.out.println("Meti assignment statement");:}
+			| function_call_statement  {:System.out.println("Meti funccall statement");:}
+			| for_statement {:System.out.println("Meti for statement");:}
+			| variable_declaration {:System.out.println("Meti var_decla statement");:}
+			| while_statement {:System.out.println("Meti while statement");:}
+			| printf_statement {:System.out.println("Meti printf statement");:}
+			| scanf_statement  {:System.out.println("Meti scanf statement");:}
+			| error  ;
+
+scanf_statement ::= SCANF LPAREN CONSTSTR RPAREN SEMICOLON {:System.out.println("SCANF");:}
+				//| SCANF LPAREN CONSTSTR param_list RPAREN SEMICOLON
+				;
+
+
+
+
+
+
+
+variable_declaration ::= type variable SEMICOLON {:System.out.println("SCANF");:}
+					| 
+					|  ; 
+
+variable ::= IDENTIFIER {:System.out.println("Soy una variable");:}
+		| IDENTIFIER LBRACK expr RBRACK {:System.out.println("Soy una variable");:};
+
+
+
+expr ::= term exprP {:System.out.println("meti Sali" );:};	
+exprP ::= PLUS term exprP {:System.out.println("meti Primo");:} 
+		| MINUS term exprP {:System.out.println("meti Primo menos");:}
+		| error expr
+		|
+		;
+
+term ::= factor termP {:System.out.println("meti MULT menos");:}
+		;
+
+termP ::= MULT factor termP {:System.out.println("meti MULT menos");:}
+		| DIV factor termP {:System.out.println("meti DIV menos");:}
+		|
+		;
+
+factor ::= INTEGER:IDES 			{:System.out.println("meti int a FActor"); RESULT = new factor_int(IDES);:}
+		| variable 				{:System.out.println("meti var a FActor");:}
+		| LPAREN expr RPAREN {:System.out.println("meti EXPR a FActor");:}
+		| constant   {:System.out.println("meti CONSTANT a FActor");:}
+		|function_call  {:System.out.println("meti FCALL a FActor");:}
+		;
+
+function_call ::= IDENTIFIER LPAREN args RPAREN {:System.out.println("CONVIERTO A FC");:};
+
+args::= arg_list| ;
+arg_list ::= expr arg_listP;
+
+arg_listP ::= COMMA expr arg_listP
+			|
+			;
+
+
+/*
+postfix_expression ::=
+ 	primary
+ |	IDENTIFIER
+ 
+ ;
+unary_expression ::=
+ 	postfix_expression
+ |	NOT unary_expression
+ |	PLUS unary_expression
+ |	MINUS unary_expression
+ ;
+
+
+
+
+
+multiplicative_expression ::=
+ 	unary_expression
+ 	|	multiplicative_expression MULT unary_expression
+	|	multiplicative_expression DIV unary_expression
+ 	|	multiplicative_expression MOD unary_expression
+ 	|	error  	{: parser.report_error("multiplicative_expression","WRONG"); :}  
+ 	MULT unary_expression
+ 	|	error 
+ 	{: parser.report_error("multiplicative_expression","WRONG"); :} 
+ 	DIV unary_expression
+ 	|	error 
+ 	{: parser.report_error("multiplicative_expression","WRONG"); :}
+ 	MOD unary_expression;
+
+
+
+
+
+additive_expression ::=
+ 	multiplicative_expression
+ |	additive_expression PLUS multiplicative_expression
+ |	additive_expression MINUS multiplicative_expression
+ ;
+
+
+
+literal = CONSTSTR    	{:System.out.println("String literal");:}
+		| CONSTCHAR		{:System.out.println("CHAR literal");:}
+		| INTEGER;		{::};
+
+
+
+type :: = INT:literal_int			{:RESULT = new literal_int(literal_int);:}
+		| CHAR 			{:System.out.println("char");:}
+		| STRING   		{:System.out.println("string");:}
+		; 	
+
+*/
