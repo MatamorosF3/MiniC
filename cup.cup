@@ -28,33 +28,50 @@ non terminal param_type_list,param_id,for_statement,expr_for,E1,E2,E3,constant;
 non terminal init_for,condition,function_call,function_call_statement,increment;
 non terminal expr_increment, inc,args, arg_list, while_statement, statement_inside_while;
 non terminal printf_statement, scanf_statement, flags, play, main, function_definition,declarations;
-non terminal function_definition_list, inc_special, Expression;
+non terminal function_definition_list, inc_special, Expression, exprP, termP,variable_initializationP, assignment_expressionP;
+non terminal param_listP, init_forP, conditionP, incrementP,arg_listP;
 
-
-Main_Function ::= INT MAIN LPAREN params RPAREN LBRACE statement_list RETURN expr SEMICOLON RBRACE function_definition_list |
-error {: System.out.println("Error sintactico en la sentencia"); :} ;
+Main_Function ::= INT MAIN LPAREN params RPAREN LBRACE statement_list RETURN expr SEMICOLON RBRACE function_definition_list 
+				|
+				;
 variable_declaration ::= type variable_list SEMICOLON;
-expr ::= expr PLUS term | expr MINUS term | term;
-term ::= term MULT factor | term DIV factor | factor;
+expr ::= term exprP;
+exprP ::= PLUS term exprP 
+		| MINUS term exprP
+		|
+		;
+//expr ::= expr PLUS term | expr MINUS term | term;
+term ::= factor termP
+		;
+
+termP ::= MULT factor termP
+		| DIV factor termP
+		|
+		;
+
+//term ::= term MULT factor | term DIV factor | factor;
 factor ::=    INTEGER| variable| LPAREN expr RPAREN| constant | function_call ;
 variable_list ::=   variable_list COMMA variable_initialization | variable_initialization;
 			
 variable ::= IDENTIFIER | IDENTIFIER LBRACK expr RBRACK;
+
+//variable_initialization ::= variable variable_initializationP
+//						|
+//						;
+//variable_initializationP ::= EQ expr variable_initializationP
+//						| 
+//						;
+
 variable_initialization ::= variable_initialization EQ expr| variable;
 type ::= INT | STRING | CHAR;
 
-Expression ::= variable EQ Expression 
-			| variable PLUSEQ Expression
-			| variable MINUSEQ Expression
-			| variable PLUSPLUS
-			| variable MULTEQ Expression;
 
-jump_statement ::= BREAK SEMICOLON | RETURN SEMICOLON | RETURN expr SEMICOLON ;
-if_statement ::= IF LPAREN boolean_expression RPAREN statement_inside_if;
+jump_statement ::= BREAK SEMICOLON | RETURN SEMICOLON | RETURN expr SEMICOLON | error SEMICOLON;
+if_statement ::= IF LPAREN boolean_expression RPAREN statement_inside_if ;
 
 statement_list ::= statement_list statement | ;
 statement::= if_statement | jump_statement|assignment_statement | function_call_statement | for_statement| variable_declaration 
-			| while_statement | printf_statement | scanf_statement;
+			| while_statement | printf_statement | scanf_statement ;
 
 statement_inside_if ::= LBRACE statement_list RBRACE | LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE;
 
@@ -71,9 +88,24 @@ function_declaration ::= type IDENTIFIER LPAREN params RPAREN SEMICOLON;
 function_definition_list ::= function_definition | function_definition_list function_definition;
 function_definition ::= type IDENTIFIER LPAREN params RPAREN LBRACE statement_list RBRACE | VOID IDENTIFIER LPAREN params RPAREN LBRACE statement_list RBRACE ;
 assignment_statement ::= assignment_expression SEMICOLON;
-assignment_expression ::= variable_initialization| expr_increment | assignment_expression variable_initialization ;
+
+assignment_expression ::= variable_initialization assignment_expressionP
+						| expr_increment assignment_expressionP
+						;
+
+assignment_expressionP ::= variable_initialization assignment_expressionP
+					| 
+						;						
+//assignment_expression ::= variable_initialization| expr_increment | assignment_expression variable_initialization ;
 params ::= param_list | ;
-param_list ::= param_list COMMA param_type_list | param_type_list;
+
+param_list ::= param_type_list param_listP;
+
+param_listP ::= COMMA param_type_list param_listP
+			|
+			;
+
+//param_list ::= param_list COMMA param_type_list | param_type_list;
 param_type_list ::= type param_id;
 param_id ::= IDENTIFIER | IDENTIFIER LBRACK RBRACK;
 
@@ -92,14 +124,40 @@ constant ::= CONSTCHAR
 		| CONSTSTR
 		;
 
-init_for ::= init_for COMMA INT assignment_expression| INT assignment_expression | assignment_expression | init_for COMMA assignment_expression;
 
-condition ::= condition COMMA IDENTIFIER relational_operators expr | IDENTIFIER relational_operators expr;
+init_for ::= INT assignment_expression init_forP
+			| assignment_expression
+			;
+
+init_forP ::= COMMA INT assignment_expression init_forP
+			| COMMA assignment_expression
+			|
+			; 			
+//init_for ::= init_for COMMA INT assignment_expression| INT assignment_expression | assignment_expression | init_for COMMA 
+ //assignment_expression;
+
+condition ::= IDENTIFIER relational_operators expr conditionP;
+conditionP ::= COMMA IDENTIFIER relational_operators expr conditionP
+			|
+			;
+
+//condition ::= condition COMMA IDENTIFIER relational_operators expr | IDENTIFIER relational_operators expr;
 function_call ::= IDENTIFIER LPAREN args RPAREN;
 function_call_statement ::= function_call SEMICOLON;
-increment ::= increment COMMA expr_increment | expr_increment;
+
+increment ::= expr_increment incrementP;
+
+incrementP ::= COMMA expr_increment incrementP
+			|
+			;
+//increment ::= increment COMMA expr_increment | expr_increment;
 expr_increment ::= variable inc | inc_special variable;
 inc ::= MINUSEQ expr | MINUSMINUS | PLUSEQ expr | PLUSPLUS | DIVEQ expr | MULTEQ expr ;
 inc_special ::= PLUSPLUS | MINUSMINUS;
 args::= arg_list| ;
-arg_list ::= arg_list COMMA expr | expr	;
+arg_list ::= expr arg_listP;
+
+arg_listP ::= COMMA expr arg_listP
+			|
+			;
+//arg_list ::= arg_list COMMA expr | expr	;
