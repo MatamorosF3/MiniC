@@ -769,203 +769,203 @@ class Yylex implements java_cup.runtime.Scanner {
             }
           case 54: break;
           case 3: 
-            { System.out.println("Div: " + yytext()); return new Symbol(sym.DIV,yycolumn,yyline,yytext());
+            { return new Symbol(sym.DIV,yycolumn,yyline,yytext());
             }
           case 55: break;
           case 4: 
-            { System.out.println("Mult: " + yytext()); return new Symbol(sym.MULT,yycolumn,yyline,yytext());
+            { return new Symbol(sym.MULT,yycolumn,yyline,yytext());
             }
           case 56: break;
           case 5: 
-            { System.out.println("Integer: " + yytext());return new Symbol(sym.INTEGER,yycolumn,yyline,yytext());
+            { return new Symbol(sym.INTEGER,yycolumn,yyline,yytext());
             }
           case 57: break;
           case 6: 
-            { System.out.println("Identifier: "  + yytext()); return new Symbol(sym.IDENTIFIER,yycolumn,yyline,yytext());
+            { return new Symbol(sym.IDENTIFIER,yycolumn,yyline,yytext());
             }
           case 58: break;
           case 7: 
-            { System.out.println("Plus: " + yytext()); return new Symbol(sym.PLUS,yycolumn,yyline,yytext());
+            { return new Symbol(sym.PLUS,yycolumn,yyline,yytext());
             }
           case 59: break;
           case 8: 
-            { System.out.println("Minus: " + yytext()); return new Symbol(sym.MINUS,yycolumn,yyline,yytext());
+            { return new Symbol(sym.MINUS,yycolumn,yyline,yytext());
             }
           case 60: break;
           case 9: 
-            { System.out.println("Not: " + yytext()); return new Symbol(sym.NOT,yycolumn,yyline,yytext());
+            { return new Symbol(sym.NOT,yycolumn,yyline,yytext());
             }
           case 61: break;
           case 10: 
-            { System.out.println("Asignar: " + yytext()); return new Symbol(sym.EQ,yycolumn,yyline,yytext());
+            { return new Symbol(sym.EQ,yycolumn,yyline,yytext());
             }
           case 62: break;
           case 11: 
-            { System.out.println("Greater than: " + yytext()); return new Symbol(sym.GT,yycolumn,yyline,yytext());
+            { return new Symbol(sym.GT,yycolumn,yyline,yytext());
             }
           case 63: break;
           case 12: 
-            { System.out.println("Less than: " + yytext()); return new Symbol(sym.LT,yycolumn,yyline,yytext());
+            { return new Symbol(sym.LT,yycolumn,yyline,yytext());
             }
           case 64: break;
           case 13: 
-            { System.out.println("Or " + yytext()); return new Symbol(sym.OR,yycolumn,yyline,yytext());
+            { return new Symbol(sym.OR,yycolumn,yyline,yytext());
             }
           case 65: break;
           case 14: 
-            { System.out.println("And" + yytext()); return new Symbol(sym.AND,yycolumn,yyline,yytext());
+            { return new Symbol(sym.AND,yycolumn,yyline,yytext());
             }
           case 66: break;
           case 15: 
-            { System.out.println("Semicolon" + yytext());return new Symbol(sym.SEMICOLON,yycolumn,yyline,yytext());
+            { return new Symbol(sym.SEMICOLON,yycolumn,yyline,yytext());
             }
           case 67: break;
           case 16: 
-            { System.out.println("Comma: " + yytext()); return new Symbol(sym.COMMA,yycolumn,yyline,yytext());
+            { return new Symbol(sym.COMMA,yycolumn,yyline,yytext());
             }
           case 68: break;
           case 17: 
-            { System.out.println("LBrace: " + yytext());return new Symbol(sym.LBRACE,yycolumn,yyline,yytext());
+            { return new Symbol(sym.LBRACE,yycolumn,yyline,yytext());
             }
           case 69: break;
           case 18: 
-            { System.out.println("RBrace: " + yytext()); return new Symbol(sym.RBRACE,yycolumn,yyline,yytext());
+            { return new Symbol(sym.RBRACE,yycolumn,yyline,yytext());
             }
           case 70: break;
           case 19: 
-            { System.out.println("LParen: " + yytext()); return new Symbol(sym.LPAREN,yycolumn,yyline,yytext());
+            { return new Symbol(sym.LPAREN,yycolumn,yyline,yytext());
             }
           case 71: break;
           case 20: 
-            { System.out.println("RParen: " + yytext());return new Symbol(sym.RPAREN,yycolumn,yyline,yytext());
+            { return new Symbol(sym.RPAREN,yycolumn,yyline,yytext());
             }
           case 72: break;
           case 21: 
-            { System.out.println("LBrack: " + yytext()); return new Symbol(sym.LBRACK,yycolumn,yyline,yytext());
+            { return new Symbol(sym.LBRACK,yycolumn,yyline,yytext());
             }
           case 73: break;
           case 22: 
-            { System.out.println("RBrack: " + yytext()); return new Symbol(sym.RBRACK,yycolumn,yyline,yytext());
+            { return new Symbol(sym.RBRACK,yycolumn,yyline,yytext());
             }
           case 74: break;
           case 23: 
-            { System.out.println("DivAsign: " + yytext()); return new Symbol(sym.DIVEQ,yycolumn,yyline,yytext());
+            { return new Symbol(sym.DIVEQ,yycolumn,yyline,yytext());
             }
           case 75: break;
           case 24: 
-            { System.out.println("MultAsign: " + yytext()); return new Symbol(sym.MULTEQ,yycolumn,yyline,yytext());
+            { return new Symbol(sym.MULTEQ,yycolumn,yyline,yytext());
             }
           case 76: break;
           case 25: 
-            { System.out.println("String: " + yytext()); return new Symbol(sym.CONSTSTR,yycolumn,yyline,yytext());
+            { return new Symbol(sym.CONSTSTR,yycolumn,yyline,yytext());
             }
           case 77: break;
           case 26: 
-            { System.out.println("Open if: " + yytext()); return new Symbol(sym.IF,yycolumn,yyline,yytext());
+            { return new Symbol(sym.IF,yycolumn,yyline,yytext());
             }
           case 78: break;
           case 27: 
-            { System.out.println("PlusPlus: " + yytext()); return new Symbol(sym.PLUSPLUS,yycolumn,yyline,yytext());
+            { return new Symbol(sym.PLUSPLUS,yycolumn,yyline,yytext());
             }
           case 79: break;
           case 28: 
-            { System.out.println("AddAsign: " + yytext()); return new Symbol(sym.PLUSEQ,yycolumn,yyline,yytext());
+            { return new Symbol(sym.PLUSEQ,yycolumn,yyline,yytext());
             }
           case 80: break;
           case 29: 
-            { System.out.println("MinusMinus: " + yytext()); return new Symbol(sym.MINUSMINUS,yycolumn,yyline,yytext());
+            { return new Symbol(sym.MINUSMINUS,yycolumn,yyline,yytext());
             }
           case 81: break;
           case 30: 
-            { System.out.println("SubAsign: " + yytext()); return new Symbol(sym.MINUSEQ,yycolumn,yyline,yytext());
+            { return new Symbol(sym.MINUSEQ,yycolumn,yyline,yytext());
             }
           case 82: break;
           case 31: 
-            { System.out.println("Not Equal: " + yytext()); return new Symbol(sym.NOTEQ,yycolumn,yyline,yytext());
+            { return new Symbol(sym.NOTEQ,yycolumn,yyline,yytext());
             }
           case 83: break;
           case 32: 
-            { System.out.println("Equal to: " + yytext()); return new Symbol(sym.EQEQ,yycolumn,yyline,yytext());
+            { return new Symbol(sym.EQEQ,yycolumn,yyline,yytext());
             }
           case 84: break;
           case 33: 
-            { System.out.println("Greater than or Equal: " + yytext()); return new Symbol(sym.GTEQ,yycolumn,yyline,yytext());
+            { return new Symbol(sym.GTEQ,yycolumn,yyline,yytext());
             }
           case 85: break;
           case 34: 
-            { System.out.println("Less than or Equal: " + yytext()); return new Symbol(sym.LTEQ,yycolumn,yyline,yytext());
+            { return new Symbol(sym.LTEQ,yycolumn,yyline,yytext());
             }
           case 86: break;
           case 35: 
-            { System.out.println("OrOr: " + yytext()); return new Symbol(sym.OROR,yycolumn,yyline,yytext());
+            { return new Symbol(sym.OROR,yycolumn,yyline,yytext());
             }
           case 87: break;
           case 36: 
-            { System.out.println("AndAnd: " + yytext()); return new Symbol(sym.ANDAND,yycolumn,yyline,yytext());
+            { return new Symbol(sym.ANDAND,yycolumn,yyline,yytext());
             }
           case 88: break;
           case 37: 
-            { System.out.println("Char: " + yytext()); return new Symbol(sym.CONSTCHAR,yycolumn,yyline,yytext());
+            { return new Symbol(sym.CONSTCHAR,yycolumn,yyline,yytext());
             }
           case 89: break;
           case 38: 
-            { System.out.println("Type: " + yytext()); return new Symbol(sym.INT,yycolumn,yyline,yytext());
+            { return new Symbol(sym.INT,yycolumn,yyline,yytext());
             }
           case 90: break;
           case 39: 
-            { System.out.println("Open for: " + yytext()); return new Symbol(sym.FOR,yycolumn,yyline,yytext());
+            { return new Symbol(sym.FOR,yycolumn,yyline,yytext());
             }
           case 91: break;
           case 40: 
-            { System.out.println("Scaneo: " + yytext()); return new Symbol(sym.SFLAG,yycolumn,yyline,yytext());
+            { return new Symbol(sym.SFLAG,yycolumn,yyline,yytext());
             }
           case 92: break;
           case 41: 
-            { System.out.println("Scaneo: " + yytext()); return new Symbol(sym.DFLAG,yycolumn,yyline,yytext());
+            { return new Symbol(sym.DFLAG,yycolumn,yyline,yytext());
             }
           case 93: break;
           case 42: 
-            { System.out.println("Scaneo: " + yytext()); return new Symbol(sym.CFLAG,yycolumn,yyline,yytext());
+            { return new Symbol(sym.CFLAG,yycolumn,yyline,yytext());
             }
           case 94: break;
           case 43: 
-            { System.out.println("main: " + yytext()); return new Symbol(sym.MAIN, yycolumn, yyline, yytext());
+            { return new Symbol(sym.MAIN, yycolumn, yyline, yytext());
             }
           case 95: break;
           case 44: 
-            { System.out.println("else del if: " + yytext()); return new Symbol(sym.ELSE,yycolumn,yyline,yytext());
+            { return new Symbol(sym.ELSE,yycolumn,yyline,yytext());
             }
           case 96: break;
           case 45: 
-            { System.out.println("void " + yytext()); return new Symbol(sym.VOID,yycolumn,yyline,yytext());
+            { return new Symbol(sym.VOID,yycolumn,yyline,yytext());
             }
           case 97: break;
           case 46: 
-            { System.out.println("Type: " + yytext()); return new Symbol(sym.CHAR,yycolumn,yyline,yytext());
+            { return new Symbol(sym.CHAR,yycolumn,yyline,yytext());
             }
           case 98: break;
           case 47: 
-            { System.out.println("Scaneo: " + yytext()); return new Symbol(sym.SCANF,yycolumn,yyline,yytext());
+            { return new Symbol(sym.SCANF,yycolumn,yyline,yytext());
             }
           case 99: break;
           case 48: 
-            { System.out.println("Open while: " + yytext()); return new Symbol(sym.WHILE,yycolumn,yyline,yytext());
+            { return new Symbol(sym.WHILE,yycolumn,yyline,yytext());
             }
           case 100: break;
           case 49: 
-            { System.out.println("Open while: " + yytext()); return new Symbol(sym.BREAK,yycolumn,yyline,yytext());
+            { return new Symbol(sym.BREAK,yycolumn,yyline,yytext());
             }
           case 101: break;
           case 50: 
-            { System.out.println("Type: " + yytext()); return new Symbol(sym.STRING,yycolumn,yyline,yytext());
+            { return new Symbol(sym.STRING,yycolumn,yyline,yytext());
             }
           case 102: break;
           case 51: 
-            { System.out.println("return: " + yytext()); return new Symbol(sym.RETURN,yycolumn,yyline,yytext());
+            { return new Symbol(sym.RETURN,yycolumn,yyline,yytext());
             }
           case 103: break;
           case 52: 
-            { System.out.println("Scaneo: " + yytext()); return new Symbol(sym.PRINTF,yycolumn,yyline,yytext());
+            { return new Symbol(sym.PRINTF,yycolumn,yyline,yytext());
             }
           case 104: break;
           default:
